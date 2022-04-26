@@ -88,8 +88,9 @@ Future<Dialog?> showImageViewerPager(
       useSafeArea: useSafeArea,
       builder: (context) {
         return Dialog(
-            backgroundColor: backgroundColor,
-            insetPadding: const EdgeInsets.all(0),
+          backgroundColor: backgroundColor,
+          insetPadding: const EdgeInsets.all(0),
+          child: SafeArea(
             child: Stack(
                 clipBehavior: Clip.none,
                 alignment: Alignment.center,
@@ -123,6 +124,8 @@ Future<Dialog?> showImageViewerPager(
                           pageController.dispose();
                         },
                       ))
-                ]));
+                ]),
+          ),
+        );
       });
 }
