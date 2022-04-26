@@ -87,44 +87,45 @@ Future<Dialog?> showImageViewerPager(
       context: context,
       useSafeArea: useSafeArea,
       builder: (context) {
-        return SafeArea(
-          child: Dialog(
-              backgroundColor: backgroundColor,
-              insetPadding: const EdgeInsets.all(0),
-              child: Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    EasyImageViewPager(
-                        easyImageProvider: imageProvider,
-                        pageController: pageController),
-                    Positioned(
-                        top: 5,
-                        right: 5,
-                        child: IconButton(
-                          icon: const Icon(Icons.close),
-                          color: closeButtonColor,
-                          tooltip: closeButtonTooltip,
-                          onPressed: () {
-                            Navigator.of(context).pop();
+        return Dialog(
+          backgroundColor: backgroundColor,
+          insetPadding: const EdgeInsets.all(0),
+          child: SafeArea(
+            child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: <Widget>[
+                  EasyImageViewPager(
+                      easyImageProvider: imageProvider,
+                      pageController: pageController),
+                  Positioned(
+                      top: 5,
+                      right: 5,
+                      child: IconButton(
+                        icon: const Icon(Icons.close),
+                        color: closeButtonColor,
+                        tooltip: closeButtonTooltip,
+                        onPressed: () {
+                          Navigator.of(context).pop();
 
-                            if (onViewerDismissed != null) {
-                              onViewerDismissed(
-                                  pageController.page?.round() ?? 0);
-                            }
+                          if (onViewerDismissed != null) {
+                            onViewerDismissed(
+                                pageController.page?.round() ?? 0);
+                          }
 
-                            if (immersive) {
-                              SystemChrome.setEnabledSystemUIMode(
-                                  SystemUiMode.edgeToEdge);
-                            }
-                            if (internalPageChangeListener != null) {
-                              pageController
-                                  .removeListener(internalPageChangeListener);
-                            }
-                            pageController.dispose();
-                          },
-                        ))
-                  ])),
+                          if (immersive) {
+                            SystemChrome.setEnabledSystemUIMode(
+                                SystemUiMode.edgeToEdge);
+                          }
+                          if (internalPageChangeListener != null) {
+                            pageController
+                                .removeListener(internalPageChangeListener);
+                          }
+                          pageController.dispose();
+                        },
+                      ))
+                ]),
+          ),
         );
       });
 }
